@@ -1,7 +1,7 @@
 {
   "name": "duo-jade",
   "version": "0.0.2",
-  "description": "seamless require jade template files",
+  "description": "seamlessly require jade template files",
   "keywords": [],
   "author": "matthew mueller <mattmuelle@gmail.com>",
   "repository": {

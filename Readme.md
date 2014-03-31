@@ -1,9 +1,31 @@
 
 # duo-jade
 
-  seamless require jade template files
+  seamlessly require jade template files within [duo](https://github.com/duojs/duo).
 
-## License 
+## Installation
+
+```
+npm install duo-jade
+```
+
+## Example
+
+```js
+Builder(__dirname + '/index.js')
+  .to('build/build.js')
+  .use(jade())
+```
+
+## API
+
+### jade(opts)
+
+Initialize the jade transform with `opts` which are passed into `jade.compileClient(src, opts)`.
+
+You can find the available options here: http://jade-lang.com/api/
+
+## License
 
 (The MIT License)
 

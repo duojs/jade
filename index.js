@@ -30,8 +30,11 @@ function transform(opts) {
       builder.include('jade-runtime', runtime);
     }
 
+    // add in the file name
+    opts.filename = json.id;
+
     return 'var jade = require(\'jade-runtime\');\n\n' +
-           'module.exports = ' + jade.compileClient(src) + ';';
+           'module.exports = ' + jade.compileClient(src, opts) + ';';
 
     first = false;
   }

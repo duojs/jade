@@ -17,6 +17,18 @@ yield Duo(root)
   .run()
 ```
 
+Then in your javascript file:
+
+```js
+var tpl = require('./template.jade');
+
+// render string
+tpl({
+  name: 'matt',
+  age: 25
+})
+```
+
 ## API
 
 ### jade(opts)

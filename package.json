@@ -9,12 +9,13 @@
     "url": "git://github.com/matthewmueller/duo-jade.git"
   },
   "dependencies": {
-    "co-fs": "^1.2.0",
     "jade": "^1.3.0"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*"
+    "co-fs": "^1.2.0",
+    "co-mocha": "0.0.4",
+    "duo": "0.x",
+    "mocha": "*"
   },
   "main": "index"
 }

@@ -2,40 +2,39 @@
  * Module Dependencies
  */
 
+var path = require.resolve('jade/runtime.js');
+var Jade = require('jade');
 var fs = require('co-fs');
-var jade = require('jade');
-var filepath = require.resolve('jade/runtime.js');
+var read = fs.readFile;
 
 /**
- * Export `transform`
+ * Expose `jade`
  */
 
-module.exports = transform;
+module.exports = jade;
 
 /**
- * Initialize `transform`
- *
- * @param {Object} opts
- * @return {*function} fn
- * @api public
+ * Jade plugin
  */
 
-function transform(opts) {
+function jade(opts) {
   opts = opts || {};
   var first = true;
 
-  return function *(src, json, builder) {
+  return function *(file, duo) {
+    if ('jade' != file.type) return;
+    file.type = 'js'; 
+
     if (first) {
-      var runtime = yield fs.readFile(filepath, 'utf8');
-      builder.include('jade-runtime', runtime);
+      var runtime = yield read(path, 'utf8');
+      duo.include('jade-runtime', runtime);
+      first = false;
     }
 
-    // add in the file name
-    opts.filename = json.id;
+    // add path for extends, includes, etc.
+    opts.filename = file.path;
 
-    return 'var jade = require(\'jade-runtime\');\n\n' +
-           'module.exports = ' + jade.compileClient(src, opts) + ';';
-
-    first = false;
+    file.src = 'var jade = require(\'jade-runtime\');\n\n' +
+               'module.exports = ' + Jade.compileClient(file.src, opts) + ';';
   }
 }

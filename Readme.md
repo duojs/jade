@@ -12,9 +12,9 @@ npm install duo-jade
 ## Example
 
 ```js
-Builder(__dirname + '/index.js')
-  .to('build/build.js')
+yield Duo(root)
   .use(jade())
+  .run()
 ```
 
 ## API

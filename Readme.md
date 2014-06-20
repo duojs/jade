@@ -37,6 +37,13 @@ Initialize the jade transform with `opts` which are passed into `jade.compileCli
 
 You can find the available options here: http://jade-lang.com/api/
 
+## Test
+
+```
+npm install
+make test
+```
+
 ## License
 
 (The MIT License)

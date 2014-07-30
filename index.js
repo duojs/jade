@@ -21,9 +21,9 @@ function jade(opts) {
   opts = opts || {};
   var first = true;
 
-  return function *(file, duo) {
+  return function *jade(file, duo) {
     if ('jade' != file.type) return;
-    file.type = 'js'; 
+    file.type = 'js';
 
     if (first) {
       var runtime = yield read(path, 'utf8');

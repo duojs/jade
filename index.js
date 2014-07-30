@@ -8,26 +8,26 @@ var fs = require('co-fs');
 var read = fs.readFile;
 
 /**
- * Expose `jade`
+ * Expose `plugin`
  */
 
-module.exports = jade;
+module.exports = plugin;
 
 /**
  * Jade plugin
  */
 
-function jade(opts) {
+function plugin(opts) {
   opts = opts || {};
   var first = true;
 
-  return function *jade(file, duo) {
+  return function *jade(file) {
     if ('jade' != file.type) return;
     file.type = 'js';
 
     if (first) {
       var runtime = yield read(path, 'utf8');
-      duo.include('jade-runtime', runtime);
+      file.include('jade-runtime', runtime);
       first = false;
     }
 

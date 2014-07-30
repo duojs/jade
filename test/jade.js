@@ -14,7 +14,7 @@ var join = path.join;
  */
 
 describe('duo-jade', function() {
-  
+
   it('should transpile simple jade templates', function*() {
     var root = fixture('simple');
     var entry = join(root, 'index.js');
@@ -23,6 +23,7 @@ describe('duo-jade', function() {
     var tpl = evaluate(js).main;
     var str = tpl({ who: 'matt' });
     assert('<h1>hi matt!</h1>' == str);
+    assert(~js.indexOf('define.amd'))
   });
 
 })

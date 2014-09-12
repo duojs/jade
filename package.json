@@ -6,7 +6,7 @@
   "author": "matthew mueller <mattmuelle@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/matthewmueller/duo-jade.git"
+    "url": "git://github.com/duojs/jade.git"
   },
   "dependencies": {
     "jade": "^1.3.0",

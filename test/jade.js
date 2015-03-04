@@ -2,12 +2,18 @@
  * Module Dependencies
  */
 
-var Duo = require('duo');
 var assert = require('assert');
-var path = require('path');
+var Duo = require('duo');
 var jade = require('..');
+var path = require('path');
+var rm = require('rimraf-then');
 var vm = require('vm');
-var join = path.join;
+
+/**
+ * Locals.
+ */
+
+var fixture = path.join.bind(path, __dirname, 'fixtures');
 
 /**
  * Tests
@@ -15,19 +21,32 @@ var join = path.join;
 
 describe('duo-jade', function() {
 
+  beforeEach(cleanup);
+  after(cleanup);
+
   it('should transpile simple jade templates', function*() {
-    var root = fixture('simple');
-    var entry = join(root, 'index.js');
-    var duo = Duo(root).use(jade()).entry(entry);
+    var duo = build('simple').use(jade());
     var js = yield duo.run();
     var tpl = evaluate(js).main;
     var str = tpl({ who: 'matt' });
     assert('<h1>hi matt!</h1>' == str);
-    assert(~js.indexOf('define.amd'))
   });
 
-})
+  it('should include the jade runtime', function*() {
+    var duo = build('simple').use(jade());
+    var js = yield duo.run();
+    assert(duo.included('jade-runtime'));
+  });
 
+});
+
+/**
+ * Cleans up the fixtures between tests.
+ */
+
+function *cleanup() {
+  yield rm(fixture('*/{components,build}'));
+}
 
 /**
  * Build `fixture` and return `str`.
@@ -36,8 +55,8 @@ describe('duo-jade', function() {
  * @return {String}
  */
 
-function build(fixture, file){
-  var root = path(fixture);
+function build(name, file){
+  var root = fixture(name);
   return Duo(root).entry(file || 'index.js');
 }
 
@@ -47,17 +66,9 @@ function build(fixture, file){
  * @return {Object}
  */
 
-function evaluate(js, ctx){
+function evaluate(js){
   var ctx = { window: {}, document: {} };
   vm.runInNewContext('main =' + js + '(1)', ctx, 'main.vm');
   vm.runInNewContext('require =' + js + '', ctx, 'require.vm');
   return ctx;
-}
-
-/**
- * Path to `fixture`
- */
-
-function fixture(fixture){
-  return join(__dirname, 'fixtures', fixture);
 }

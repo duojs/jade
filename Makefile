@@ -1,8 +1,9 @@
+BIN := ./node_modules/.bin
 
-test:
-	@./node_modules/.bin/mocha \
-		--require co-mocha \
-		--harmony-generators \
-		--reporter spec
+test: node_modules
+	@$(BIN)/gnode $(BIN)/_mocha
+
+node_modules: package.json
+	@npm install
 
 .PHONY: test

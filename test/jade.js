@@ -27,7 +27,7 @@ describe('duo-jade', function() {
   it('should transpile simple jade templates', function*() {
     var duo = build('simple').use(jade());
     var js = yield duo.run();
-    var tpl = evaluate(js).main;
+    var tpl = evaluate(js.code).main;
     var str = tpl({ who: 'matt' });
     assert('<h1>hi matt!</h1>' == str);
   });
@@ -41,7 +41,7 @@ describe('duo-jade', function() {
   it('should pass options to jade', function*() {
     var duo = build('pretty').use(jade({ pretty: true }));
     var js = yield duo.run();
-    var tpl = evaluate(js).main;
+    var tpl = evaluate(js.code).main;
     var str = tpl({ who: 'matt' }).trim();
     assert('<ul>\n  <li>a</li>\n  <li>b</li>\n</ul>' == str);
   });

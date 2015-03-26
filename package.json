@@ -1,23 +1,25 @@
 {
   "name": "duo-jade",
   "version": "0.0.6",
-  "description": "seamlessly require jade template files",
-  "keywords": [],
+  "description": "duo plugin to include jade files as template functions",
+  "keywords": [
+    "duo",
+    "jade",
+    "template",
+    "precompile"
+  ],
   "author": "matthew mueller <mattmuelle@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/duojs/jade.git"
-  },
+  "main": "lib/index.js",
+  "repository": "duojs/jade",
   "dependencies": {
     "co-fs": "^1.2.0",
-    "gnode": "^0.1.1",
     "jade": "^1.9.2"
   },
   "devDependencies": {
     "co-mocha": "^1.1.0",
     "duo": "0.x",
+    "gnode": "^0.1.1",
     "mocha": "^2.1.0",
     "rimraf-then": "^1.0.0"
-  },
-  "main": "index"
+  }
 }

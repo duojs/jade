@@ -6,7 +6,7 @@ var assert = require('assert');
 var Duo = require('duo');
 var jade = require('..');
 var path = require('path');
-var rm = require('rimraf-then');
+var rm = require('rimraf').sync;
 var vm = require('vm');
 
 /**
@@ -52,8 +52,8 @@ describe('duo-jade', function() {
  * Cleans up the fixtures between tests.
  */
 
-function *cleanup() {
-  yield rm(fixture('*/{components,build}'));
+function cleanup() {
+  rm(fixture('*/{components,build}'));
 }
 
 /**

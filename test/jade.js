@@ -6,7 +6,7 @@ var assert = require('assert');
 var Duo = require('duo');
 var jade = require('..');
 var path = require('path');
-var rm = require('rimraf-then');
+var rm = require('rimraf').sync;
 var vm = require('vm');
 
 /**
@@ -27,7 +27,7 @@ describe('duo-jade', function() {
   it('should transpile simple jade templates', function*() {
     var duo = build('simple').use(jade());
     var js = yield duo.run();
-    var tpl = evaluate(js).main;
+    var tpl = evaluate(js.code).main;
     var str = tpl({ who: 'matt' });
     assert('<h1>hi matt!</h1>' == str);
   });
@@ -41,7 +41,7 @@ describe('duo-jade', function() {
   it('should pass options to jade', function*() {
     var duo = build('pretty').use(jade({ pretty: true }));
     var js = yield duo.run();
-    var tpl = evaluate(js).main;
+    var tpl = evaluate(js.code).main;
     var str = tpl({ who: 'matt' }).trim();
     assert('<ul>\n  <li>a</li>\n  <li>b</li>\n</ul>' == str);
   });
@@ -52,8 +52,8 @@ describe('duo-jade', function() {
  * Cleans up the fixtures between tests.
  */
 
-function *cleanup() {
-  yield rm(fixture('*/{components,build}'));
+function cleanup() {
+  rm(fixture('*/{components,build}'));
 }
 
 /**

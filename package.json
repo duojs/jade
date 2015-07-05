@@ -18,6 +18,8 @@
   "devDependencies": {
     "co-mocha": "^1.1.0",
     "duo": "0.x",
+    "eslint": "^0.24.0",
+    "eslint-config-duo": "0.0.1",
     "gnode": "^0.1.1",
     "mocha": "^2.1.0",
     "rimraf": "^2.3.2"

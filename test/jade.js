@@ -29,12 +29,12 @@ describe('duo-jade', function() {
     var js = yield duo.run();
     var tpl = evaluate(js.code).main;
     var str = tpl({ who: 'matt' });
-    assert('<h1>hi matt!</h1>' == str);
+    assert.equal(str, '<h1>hi matt!</h1>');
   });
 
   it('should include the jade runtime', function*() {
     var duo = build('simple').use(jade());
-    var js = yield duo.run();
+    yield duo.run();
     assert(duo.included('jade-runtime'));
   });
 
@@ -43,7 +43,7 @@ describe('duo-jade', function() {
     var js = yield duo.run();
     var tpl = evaluate(js.code).main;
     var str = tpl({ who: 'matt' }).trim();
-    assert('<ul>\n  <li>a</li>\n  <li>b</li>\n</ul>' == str);
+    assert.equal(str, '<ul>\n  <li>a</li>\n  <li>b</li>\n</ul>');
   });
 
 });

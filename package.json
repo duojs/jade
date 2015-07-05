@@ -16,6 +16,7 @@
     "jade": "^1.9.2"
   },
   "devDependencies": {
+    "bluebird": "^2.9.32",
     "co-mocha": "~1.0.3",
     "duo": "0.x",
     "eslint": "^0.24.0",

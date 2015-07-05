@@ -65,7 +65,7 @@ function cleanup() {
 
 function build(name, file){
   var root = fixture(name);
-  return Duo(root).entry(file || 'index.js');
+  return Duo(root).cache(false).entry(file || 'index.js');
 }
 
 /**

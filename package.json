@@ -16,7 +16,7 @@
     "jade": "^1.9.2"
   },
   "devDependencies": {
-    "co-mocha": "^1.1.0",
+    "co-mocha": "~1.0.3",
     "duo": "0.x",
     "eslint": "^0.24.0",
     "eslint-config-duo": "0.0.1",
